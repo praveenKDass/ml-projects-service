@@ -160,6 +160,19 @@ module.exports = class UserProjectsHelper {
                 }
                 let createNewProgramAndSolution = false;
                 let solutionExists = false;
+                
+                if (
+                    (userProject[0].programId && !data.programId) ||
+                    (userProject[0].solutionInformation?._id && !data.solutionId)
+                ) {
+                    throw {
+                        status: HTTP_STATUS_CODE['bad_request'].status,
+                        message:
+                        userProject[0].programId && !data.programId
+                                ? CONSTANTS.apiResponses.REQUIRED_PROGRAM_ID
+                                : CONSTANTS.apiResponses.REQUIRED_SOLUTION_ID
+                    };
+                }
 
                 if (data.programId && data.programId !== "") {
 
@@ -176,7 +189,7 @@ module.exports = class UserProjectsHelper {
                         solutionExists = true; 
                     }
 
-                } else if (data.programName && !userProject[0].programId) {
+                } else if (data.programName) {
 
                     if (!userProject[0].solutionInformation) {
                         createNewProgramAndSolution = true;
