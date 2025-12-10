@@ -602,7 +602,7 @@ const removeSolutionsFromProgram = function ( token,programId,solutionIds,checkP
         try {
             
             const url = 
-            ASSESSMENT_URL + CONSTANTS.endpoints.REMOVE_SOLUTIONS_FROM_PROGRAM + "/" + programId + "?checkProgramIdExists=" + checkProgramIdExists + "&projectId=" + projectId +"&referneceFrom=ml-project";
+            ASSESSMENT_URL + CONSTANTS.endpoints.REMOVE_SOLUTIONS_FROM_PROGRAM + "/" + programId + "?checkProgramIdExists=" + checkProgramIdExists + "&projectId=" + projectId +"&referneceFrom=ml-project"+"&ts"+ Date.now();
 
             const options = {
                 headers : {

@@ -230,7 +230,7 @@ module.exports = class UserProjectsHelper {
                     }
 
                     if (solutionExists) {
-                        let checkProgramIdExists = data?.programId ? true :false
+                        let checkProgramIdExists = data.programId ? true :false
                         let updateProgram =
                             await surveyService.removeSolutionsFromProgram(
                                 userToken,
