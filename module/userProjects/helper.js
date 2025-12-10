@@ -160,19 +160,6 @@ module.exports = class UserProjectsHelper {
                 }
                 let createNewProgramAndSolution = false;
                 let solutionExists = false;
-                
-                if (
-                    (userProject[0].programId && !data.programId) ||
-                    (userProject[0].solutionInformation?._id && !data.solutionId)
-                ) {
-                    throw {
-                        status: HTTP_STATUS_CODE['bad_request'].status,
-                        message:
-                        userProject[0].programId && !data.programId
-                                ? CONSTANTS.apiResponses.REQUIRED_PROGRAM_ID
-                                : CONSTANTS.apiResponses.REQUIRED_SOLUTION_ID
-                    };
-                }
 
                 if (data.programId && data.programId !== "") {
 
@@ -245,12 +232,14 @@ module.exports = class UserProjectsHelper {
                     }
 
                     if (solutionExists && userProject[0].isAPrivateProgram) {
-
+                        let checkProgramIdExists = data.programId ? true :false
                         let updateProgram =
                             await surveyService.removeSolutionsFromProgram(
                                 userToken,
                                 userProject[0].programInformation._id,
-                                [userProject[0].solutionInformation._id]
+                                [userProject[0].solutionInformation._id],
+                                checkProgramIdExists,
+                                projectId.toString(),
                             );
 
                         if (!updateProgram.success) {
@@ -376,7 +365,7 @@ module.exports = class UserProjectsHelper {
                 if ( data.status == CONSTANTS.common.COMPLETED_STATUS || data.status == CONSTANTS.common.SUBMITTED_STATUS ) {
                     updateProject.completedDate = new Date();
                 }
-                
+
                 let projectUpdated =
                     await projectQueries.findOneAndUpdate(
                         {
