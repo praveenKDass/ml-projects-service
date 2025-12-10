@@ -376,6 +376,15 @@ module.exports = class UserProjectsHelper {
                 if ( data.status == CONSTANTS.common.COMPLETED_STATUS || data.status == CONSTANTS.common.SUBMITTED_STATUS ) {
                     updateProject.completedDate = new Date();
                 }
+
+                // remove restricted keys
+                updateProject = _.omit(updateProject, [
+                                          "programInformation",
+                                          "solutionInformation",
+                                          "programId",
+                                          "solutionId"
+                                        ]);
+                
                 
                 let projectUpdated =
                     await projectQueries.findOneAndUpdate(
