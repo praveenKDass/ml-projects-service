@@ -136,6 +136,4 @@ module.exports = {
     "ISSUER_KID_NOT_FOUND" : "Failed to fetch certificate issuer kid",
     "PROJECT_SUBMITTED_FOR_REISSUE" : "Submitted for project certificate reIssue",
     "FAILED_TO_START_RESOURCE": "There was an error in starting/joining. Please try again after some time.",
-    "REQUIRED_PROGRAM_ID": "Required program id",
-
 };

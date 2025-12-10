@@ -119,9 +119,7 @@ module.exports = class UserProjectsHelper {
                     "entityInformation._id",
                     "lastDownloadedAt",
                     "appInformation",
-                    "status",
-                    "programId",
-                    "isAPrivateProgram"
+                    "status"
                 ]);
                 
                 if (!userProject.length > 0) {
@@ -231,8 +229,8 @@ module.exports = class UserProjectsHelper {
                         return resolve(programAndSolutionInformation);
                     }
 
-                    if (solutionExists && userProject[0].isAPrivateProgram) {
-                        let checkProgramIdExists = data.programId ? true :false
+                    if (solutionExists) {
+                        let checkProgramIdExists = data?.programId ? true :false
                         let updateProgram =
                             await surveyService.removeSolutionsFromProgram(
                                 userToken,
